@@ -73,10 +73,15 @@ print "Normalize Histogram",Histogram
 
 print "Normalize Histogram1",Histogram1
 
-plt.hist(range(-20,21),40,weights=Histogram,color='blue')
+#plt.hist(range(-20,21),40,weights=Histogram,color='blue')
 
 
-plt.hist(range(-20,21),40,weights=Histogram1,color='red')
+#plt.hist(range(-20,21),40,weights=Histogram1,color='red')
+
+plt.axis(-20,20,0,1)
+plt.bar(range(-20,21), Histogram,color='blue')
+plt.bar(range(-20,21),Histogram1,color='red')
+
 
 plt.show()
 
