@@ -9,9 +9,6 @@ def main(argv):
     file=open('metin.txt','r')
 
 
-
-    threa
-
     #plaintext = list(raw_input("Lutfen bir mesaj giriniz").lower())
     plaintext=file.read()
     plaintext=plaintext.lower()
