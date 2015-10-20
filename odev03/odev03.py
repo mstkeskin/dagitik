@@ -1,15 +1,25 @@
 import sys
+import thread
 
-import threading
 
 def main(argv):
     if(len(sys.argv)!=2):
         sys.exit("Lutfen 2den buyuk bir sayi giriniz ")
 
-    plaintext = list(raw_input("Lutfen bir mesaj giriniz"))
+    file=open('metin.txt','r')
+
+
+
+    threa
+
+    #plaintext = list(raw_input("Lutfen bir mesaj giriniz").lower())
+    plaintext=file.read()
+    plaintext=plaintext.lower()
     alfabe=list('abcdefghijklmnopqrstuvwxyz')
     s = int(sys.argv[1])
     sifreleme = ''
+
+
 
     for c in plaintext:
         if c in alfabe:
@@ -19,7 +29,13 @@ def main(argv):
 
     sifreleme=sifreleme.upper()
 
-    print 'Sifreli mesajiniz: ' + sifreleme
+    filename="crypted_<%d>.txt" %s
+    file = open(filename,'w')
+    file.write(sifreleme)
+    file.close()
+
+
+    #print 'Sifreli mesajiniz: ' + sifreleme
 
 if __name__ == "__main__":
     main(sys.argv[1:])
