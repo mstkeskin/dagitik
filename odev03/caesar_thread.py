@@ -2,7 +2,6 @@ __author__ = 'mesutkeskin'
 
 import Queue
 import threading
-import time
 
 exitFlag = 0
 
@@ -16,32 +15,23 @@ class myThread(threading.Thread):
 
     def run(self):
         print "Starting " + self.name
-        # threadLock.acquire()
         oku_ve_sifrele(self.name, self.q)
-        # threadLock.release()
         print "Exiting " + self.name
-
-        # def main(argv):
-        #   if(len(sys.argv)!=2):
-        # sys.exit("Lutfen 2den buyuk bir sayi giriniz ")
-
 
 s = input("Lutfen kayma sayisi giriniz:")
 num_thread = input("Lutfen thread sayisini belirtiniz:")
 num_character = input("Lutfen calisilacak karakter sayisini belirtiniz:")
 global_file = open('metin.txt', 'r')
-
+filename = "crypted_%d_%d_%d.txt" % (s, num_thread, num_character)
+file = open(filename, 'a')
 
 def oku_ve_sifrele(threadName, q):
-    filename = "crypted_%d_%d_%dtxt" % (s, num_thread, num_character)
-    file = open(filename, 'a')
     while not exitFlag:
         queueLock.acquire()
         if not workQueue.empty():
             plaintext = q.get()
             plaintext = plaintext.lower()
             alfabe = list('abcdefghijklmnopqrstuvwxyz')
-
             sifreleme = ''
             for c in plaintext:
                 if c in alfabe:
@@ -54,8 +44,6 @@ def oku_ve_sifrele(threadName, q):
             queueLock.release()
         else:
             queueLock.release()
-    file.close()
-
 
 queueLock = threading.Lock()
 workQueue = Queue.Queue()
@@ -83,5 +71,8 @@ exitFlag = 1
 
 for t in threads:
     t.join()
-print
-"Exiting Main Thread"
+
+file.close()
+global_file.close()
+
+print "Exiting Main Thread"
